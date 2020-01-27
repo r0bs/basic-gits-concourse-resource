@@ -11,10 +11,6 @@ git_url=$(jq '.source.git_url' -r <<< "$input")
 git_host=$(jq '.source.git_host' -r <<< "$input")
 private_key=$(jq '.source.private_key' -r <<< "$input")
 
-echo $repos > /tmp/repos.list
-
-cat /tmp/repos.list
-
 eval `ssh-agent`
 
 if [ ! -d $HOME/.ssh ]; then
@@ -24,6 +20,6 @@ fi
 ssh-keyscan $git_host >> ~/.ssh/known_hosts
 ssh-add - <<< "$private_key"
 
-cat /tmp/repos.list | xargs -n 1 -P 30 -I % sh -c "git clone ${git_url}/%.git $dest/%"
+echo $repos | xargs -n 1 -P 30 -I % sh -c "git clone ${git_url}/%.git $dest/%"
 
 echo '{ "version": { "ref": "none", "message": "Hello World" }, "metadata": [{ "name": "message", "value": "Hello World" }] }'
