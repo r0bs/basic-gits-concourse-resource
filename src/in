@@ -1,2 +1,19 @@
 #!/bin/bash
+
+set -xe
+
+dest=$1
+
+input="$(cat)"
+
+repos: $(jq '.source.repos' <<< "$input")
+git_url: $(jq '.source.git_url' <<< "$input")
+private_key: $(jq '.private_key' <<< "$input")
+
+ssh-add - <<< "${private_key}"
+
+git clone ${git_url}/${repos} $dest
+
 echo '{ "version": { "ref": "none", "message": "Hello World" }, "metadata": [{ "name": "message", "value": "Hello World" }] }'
+
+
