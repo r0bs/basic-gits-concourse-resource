@@ -8,12 +8,14 @@ input="$(cat)"
 
 repos=$(jq '.source.repos' <<< "$input")
 git_url=$(jq '.source.git_url' <<< "$input")
-private_key=$(jq '.private_key' <<< "$input")
+private_key=$(jq '.source.private_key' <<< "$input")
 
 eval `ssh-agent`
 ssh-add - <<< "${private_key}"
 
 git clone ${git_url}/${repos} $dest
+
+echo $repos | xargs -n 1 -P 30 git clone
 
 echo '{ "version": { "ref": "none", "message": "Hello World" }, "metadata": [{ "name": "message", "value": "Hello World" }] }'
 
