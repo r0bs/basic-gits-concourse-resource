@@ -22,5 +22,3 @@ git clone ${git_url}/${repos} $dest
 echo $repos | xargs -n 1 -P 30 git clone
 
 echo '{ "version": { "ref": "none", "message": "Hello World" }, "metadata": [{ "name": "message", "value": "Hello World" }] }'
-
-
