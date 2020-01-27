@@ -20,7 +20,7 @@ fi
 ssh-keyscan $git_host >> ~/.ssh/known_hosts
 ssh-add - <<< "$private_key"
 
-git clone ${git_url}/${repos} $dest
+git clone ${git_url}/${repos}.git $dest
 
 echo $repos | xargs -n 1 -P 30 git clone
 
