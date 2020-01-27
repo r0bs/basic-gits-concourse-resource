@@ -6,13 +6,13 @@ dest=$1
 
 input="$(cat)"
 
-repos=$(jq '.source.repos' <<< "$input")
-git_url=$(jq '.source.git_url' <<< "$input")
-private_key=$(jq '.source.private_key' <<< "$input")
+repos=$(jq '.source.repos' -r <<< "$input")
+git_url=$(jq '.source.git_url' -r <<< "$input")
+private_key=$(jq '.source.private_key' -r <<< "$input")
 
 eval `ssh-agent`
 
-ssh-add - <<< "${private_key}"
+ssh-add - <<< "$private_key"
 
 git clone ${git_url}/${repos} $dest
 
