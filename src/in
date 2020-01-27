@@ -22,4 +22,4 @@ ssh-add - <<< "$private_key"
 
 printf "$repos" | xargs -P 30 -I % sh -c "git clone $git_url/%.git $dest/%"
 
-printf '{ "version": { "ref": "none", "message": "Hello World" }, "metadata": [{ "name": "message", "value": "Hello World" }] }'
+echo '{ "version": { "ref": "none", "message": "Hello World" }, "metadata": [{ "name": "message", "value": "Hello World" }] }'
