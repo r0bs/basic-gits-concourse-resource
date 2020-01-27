@@ -10,6 +10,7 @@ repos=$(jq '.source.repos' <<< "$input")
 git_url=$(jq '.source.git_url' <<< "$input")
 private_key=$(jq '.private_key' <<< "$input")
 
+eval `ssh-agent`
 ssh-add - <<< "${private_key}"
 
 git clone ${git_url}/${repos} $dest
