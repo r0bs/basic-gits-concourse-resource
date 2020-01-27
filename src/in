@@ -6,7 +6,7 @@ dest=$1
 
 input="$(cat)"
 
-repos=$(jq '.source.repos[] | @sh' -r <<< "$input")
+repos=$(jq '.source.repos[]' -r <<< "$input")
 git_url=$(jq '.source.git_url' -r <<< "$input")
 git_host=$(jq '.source.git_host' -r <<< "$input")
 private_key=$(jq '.source.private_key' -r <<< "$input")
@@ -19,11 +19,6 @@ fi
 
 ssh-keyscan $git_host >> ~/.ssh/known_hosts
 ssh-add - <<< "$private_key"
-
-for repo in "${repos[@]}"; 
-    do
-        git clone ${git_url}/${repo}.git $dest/${repo}
-    done;
 
 echo $repos | xargs -n 1 -P 30 -I % sh -c "git clone ${git_url}/%.git $dest/%"
 
