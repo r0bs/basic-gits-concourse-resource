@@ -12,6 +12,11 @@ git_host=$(jq '.source.git_host' -r <<< "$input")
 private_key=$(jq '.source.private_key' -r <<< "$input")
 
 eval `ssh-agent`
+
+if [ ! -d $HOME/.ssh ]; then
+  mkdir -p $HOME/.ssh
+fi
+
 ssh-keyscan $git_host >> ~/.ssh/known_hosts
 ssh-add - <<< "$private_key"
 
