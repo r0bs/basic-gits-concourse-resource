@@ -11,7 +11,7 @@ git_url=$(jq '.source.git_url' -r <<< "$input")
 git_host=$(jq '.source.git_host' -r <<< "$input")
 private_key=$(jq '.source.private_key' -r <<< "$input")
 
-eval `ssh-agent`
+eval `ssh-agent` 1> /dev/null
 
 if [ ! -d $HOME/.ssh ]; then
   mkdir -p $HOME/.ssh
