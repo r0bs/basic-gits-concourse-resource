@@ -22,8 +22,14 @@ ssh-add - <<< "$private_key"
 
 # printf "$repos" | xargs -P 30 -I % bash -c "git clone $git_url/%.git $dest/%"
 
-for repo in $repos; do
-    git clone $git_url/$repo.git $dest/$repo
-done
+# for repo in $repos; do
+#     git clone $git_url/$repo.git $dest/$repo
+# done
 
-echo '{ "version": { "ref": "none", "message": "Hello World" }, "metadata": [{ "name": "message", "value": "Hello World" }] }'
+return_ref=none
+metadata='[{ "name": "message", "value": "Hello World" }]'
+
+jq -n "{
+  version: {ref: $(echo $return_ref | jq -R .)},
+  metadata: $metadata
+}" >&1
