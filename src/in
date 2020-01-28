@@ -20,6 +20,10 @@ fi
 ssh-keyscan $git_host >> ~/.ssh/known_hosts
 ssh-add - <<< "$private_key"
 
-printf "$repos" | xargs -P 30 -I % bash -c "git clone $git_url/%.git $dest/%"
+# printf "$repos" | xargs -P 30 -I % bash -c "git clone $git_url/%.git $dest/%"
+
+for repo in ${(z)repos}; do
+    git clone $git_url/$repo.git $dest/$repo
+done
 
 echo '{ "version": { "ref": "none", "message": "Hello World" }, "metadata": [{ "name": "message", "value": "Hello World" }] }'
