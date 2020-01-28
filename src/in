@@ -32,4 +32,4 @@ metadata='[{ "name": "message", "value": "Hello World" }]'
 jq -n "{
   version: {ref: $(echo $return_ref | jq -R .)},
   metadata: $metadata
-}" >&1
+}"
