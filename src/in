@@ -23,7 +23,7 @@ ssh-add - <<< "$private_key"
 
 printf "$repos" | xargs -P 30 -I % bash -c "git clone $git_url/%.git $dest/%"
 
-printf "$repos" | xargs -I % sh -c "cd % && git log | head -1 | cut -d ' ' -f2 >> /tmp/lastcommits.log"
+printf "$repos" | xargs -I % sh -c "cd $dest/% && git log | head -1 | cut -d ' ' -f2 >> /tmp/lastcommits.log"
 
 hash=$(md5sum /tmp/lastcommits.log | cut -d " " -f1)
 
