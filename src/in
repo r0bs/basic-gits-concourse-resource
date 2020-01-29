@@ -20,16 +20,14 @@ fi
 ssh-keyscan $git_host >> ~/.ssh/known_hosts
 ssh-add - <<< "$private_key"
 
+
 printf "$repos" | xargs -P 30 -I % bash -c "git clone $git_url/%.git $dest/%"
 
-# for repo in $repos; do
-#     git clone $git_url/$repo.git $dest/$repo
-# done
 
-return_ref=none
-metadata='[{ "name": "message", "value": "Hello World" }]'
+printf "$repos" | xargs -I % sh -c "cd $dest/% && git log | head -1 | cut -d ' ' -f2 >> /tmp/lastcommits.log"
+return_ref=$(md5sum /tmp/lastcommits.log | cut -d " " -f1)
 
 jq -n "{
   version: {ref: $(echo $return_ref | jq -R .)},
-  metadata: $metadata
+  metadata: [{ name: 'hash', value: $(echo $return_ref | jq -R .) }]
 }"

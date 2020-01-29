@@ -1,0 +1,42 @@
+17ac0ac downloading
+467b58b not logging from ssh-agent
+56d2820 stdout
+6527759 jq
+cbc8d3d plain
+8e9f017 loop instead of xargs
+e8ec4a7 bash
+bdcb21a newline
+ba33908 printf
+7ef30f6 "$test"
+d391352 n
+a87c29f printf
+842221b minus xargs
+e8f46fd update
+7b9baaf update
+df34136 alpine to ubuntu
+953d91a NUL
+ec16a65 array again
+614502c update
+eaf108e no array
+9cb20fd update
+21f82df  | @sh
+0c4d4f4 loop
+0689a01 update
+c72262b fix
+6e57092 outsourcing repo list
+154abed update
+c96a89b update
+74dbd32 fix
+e38ea5c creating .ssh folder
+a275510 order
+a480a08 check
+bcb4434 adding git host to .known hosts
+642089e using -r (raw) jq output
+b91bf0e fixed parh
+24b840f fixed path to private key
+d2823d8 starting ssh agent
+7c98ae6 added openssh-client as dep to docker file
+c423ef8 fix
+99410d6 some first steps
+51c1bde basic setup
+ea08a31 first commit
