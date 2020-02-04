@@ -2,7 +2,9 @@
 
 set -xe
 
-dest="tmp"
+now=$(date +%s)
+mkdir /tmp/"$now"
+dest="tmp/${now}"
 
 input="$(cat)"
 
