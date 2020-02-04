@@ -29,7 +29,7 @@ printf "%s" "$repos" | xargs -I % sh -c "cd $dest/% && git log | head -1 | cut -
 
 hash=$(md5sum /tmp/lastcommits.log | cut -d " " -f1)
 
-jq -n "{
-  version: {hash: $(echo "$hash" | jq -R .)},
-  metadata: [{ name: \"hash\", value: $(echo "$hash" | jq -R .) }]
-}"
+jq -n "[{
+  ref: \"hash\",
+  key: $(echo "$hash" | jq -R .)
+}]"
