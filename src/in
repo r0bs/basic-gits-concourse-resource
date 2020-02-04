@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -xe
+set -euf -o pipefail
 
 dest=$1
 
