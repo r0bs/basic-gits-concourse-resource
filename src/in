@@ -12,6 +12,7 @@ repos=$(jq '.source.repos[]' -r <<< "$input")
 git_url=$(jq '.source.git_url' -r <<< "$input")
 git_host=$(jq '.source.git_host' -r <<< "$input")
 private_key=$(jq '.source.private_key' -r <<< "$input")
+version=$(jq '.source.version.hash' -r <<< "$input")
 
 eval "$(ssh-agent)" 1> /dev/null
 
