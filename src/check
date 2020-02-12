@@ -27,9 +27,9 @@ ssh-add - <<< "$private_key"
 
 printf "%s" "$repos" | xargs -P 30 -I % bash -c "git clone $git_url/%.git $dest/%"
 
-printf "%s" "$repos" | xargs -I % sh -c "cd $dest/% && git log | head -1 | cut -d ' ' -f2 >> /tmp/lastcommits.log"
+printf "%s" "$repos" | xargs -I % sh -c "cd $dest/% && git log | head -1 | cut -d ' ' -f2 >> /tmp/lastcommits_${now}.log"
 
-hash=$(md5sum /tmp/lastcommits.log | cut -d " " -f1)
+hash=$(md5sum /tmp/lastcommits_${now}.log | cut -d " " -f1)
 
 if [ "$hash" != "$version" ]
 then
