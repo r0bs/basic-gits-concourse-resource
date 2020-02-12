@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euf -o pipefail
+set -xeuf -o pipefail
 
 dest=$1
 
@@ -13,7 +13,6 @@ private_key=$(jq '.source.private_key' -r <<< "$input")
 
 version=$(jq '.source.version' -r <<< "$input")
 
-echo "$version" | jq .
 
 eval "$(ssh-agent)" 1> /dev/null
 
